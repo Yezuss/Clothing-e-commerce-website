@@ -1,0 +1,185 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Male-Fashion</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="/img/logo-3.png">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/login-form-14/css/style.css">
+
+</head>
+
+<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<a th:href="@{/home}" class="heading-section">Male Fashion</a>
+				</div>
+			</div>
+			<div th:if="${forgot==null}" class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="img"
+							style="background-image: url(/login-form-14/images/bg-1.jpg);">
+						</div>
+						<div class="login-wrap p-4 p-md-5">
+							<div class="d-flex">
+								<div class="w-100" style="display: flex; transform: translateY(10px);">
+									<h3 class="mb-4">Sign In</h3>
+								</div>
+								<div class="w-100 flex-icon">
+									<a href="#"
+										class="social-icon d-flex align-items-center justify-content-center"><span
+										class="fa fa-facebook"></span></a> <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/signin-google&response_type=code&client_id=540833837549-eof6l5jn50qm1r4j72i1cnorecik8rt0.apps.googleusercontent.com&approval_prompt=force"
+										class="social-icon d-flex align-items-center justify-content-center"><span
+										class="fa fa-google"></span></a>
+								</div>
+							</div>
+							<form th:action="@{/signin}" method="POST" class="signin-form">
+								<div class="form-group mb-3">
+									<label class="label" for="name">Username</label> <input th:value="${login_name}"
+										name="login-name" type="text" class="form-control"
+										placeholder="Username" required>
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="password">Password</label> <input th:value="${pass}"
+										name="password" type="password" class="form-control"
+										placeholder="Password" required>
+								</div>
+								<div th:if="${errorLogin != null}">
+									<p style="color: red;" th:text="${errorLogin}"></p>
+								</div>
+
+								<div class="form-group">
+									<button type="submit"
+										class="form-control btn btn-primary rounded submit px-3">Sign
+										In</button>
+								</div>
+								<div class="form-group d-md-flex">
+									<div class="w-50 text-left">
+										<label class="checkbox-wrap checkbox-primary mb-0">Remember
+											Me <input name="remember" type="checkbox" checked> <span
+											class="checkmark"></span>
+										</label>
+									</div>
+									<div class="w-50 text-md-right">
+										<a th:href="@{forgot}">Forgot Password</a>
+									</div>
+								</div>
+							</form>
+							<p class="text-center">
+								Not a member? <a th:href="@{/signup}">Sign Up</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div th:if="${forgot!=null}" class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="img"
+							style="background-image: url(/login-form-14/images/bg-1.jpg);">
+						</div>
+						<div class="login-wrap p-4 p-md-5">
+							<div class="d-flex">
+								<div class="w-100" style="display: flex; transform: translateY(10px);">
+									<h4 class="mb-4">Forgot Password</h4>
+								</div>
+								<div class="w-100 flex-icon">
+									<a href="#"
+										class="social-icon d-flex align-items-center justify-content-center"><span
+										class="fa fa-facebook"></span></a> <a href="#"
+										class="social-icon d-flex align-items-center justify-content-center"><span
+										class="fa fa-google"></span></a>
+								</div>
+							</div>
+							
+							
+							<form th:if="${sendcode==null && changepass == null}" th:action="@{/forgot}" method="POST" class="signin-form">
+								<div class="form-group mb-3">
+									<label class="label" for="name">Username</label> <input
+										name="login-name" type="text" class="form-control"
+										placeholder="Username" required>
+								</div>
+								<div th:if="${error_forgot != null}">
+									<p style="color: red;" th:text="${error_forgot}"></p>
+								</div>
+
+								<div class="form-group">
+									<button type="submit"
+										class="form-control btn btn-primary rounded submit px-3">Check UserName</button>
+								</div>
+							</form>
+							
+							
+							
+							<form th:if="${sendcode!=null && changepass == null}" th:action="@{/code}" method="POST" class="signin-form">
+								<div class="form-group mb-3">
+									<label class="label" for="name">Code</label> <input
+										name="code_input" type="text" class="form-control"
+										placeholder="Please check your email and enter your code" required>
+								</div>
+								<div th:if="${error_code != null}">
+									<p style="color: red;" th:text="${error_code}"></p>
+								</div>
+
+								<div class="form-group">
+									<button type="submit"
+										class="form-control btn btn-primary rounded submit px-3">Change Password</button>
+								</div>
+							</form>
+							
+							
+							
+							<form th:if="${changepass != null}" th:action="@{/newpass}" method="POST" class="signin-form">
+								<div class="form-group mb-3">
+									<label class="label" for="name">NEW PASSWORD</label> <input
+										name="new_pass" type="password" class="form-control"
+										placeholder="New Password" required>
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="name">CONFIRM NEW PASSWORD</label> <input th:value="${login_name}"
+										name="confirm_new_pass" type="password" class="form-control"
+										placeholder="Confirm New Password" required>
+								</div>
+								<div th:if="${error_newpass != null}">
+									<p style="color: red;" th:text="${error_newpass}"></p>
+								</div>
+
+								<div class="form-group">
+									<button type="submit"
+										class="form-control btn btn-primary rounded submit px-3">Change Password</button>
+								</div>
+							</form>
+							<p style="margin-bottom: unset; margin-top: 3rem;" class="text-center">
+								Not a member? <a th:href="@{/signup}">Sign Up</a>
+							</p>
+							<p class="text-center">
+								Or &nbsp; <a th:href="@{/signin}">Sign In</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="/login-form-14/js/jquery.min.js"></script>
+	<script src="/login-form-14/js/popper.js"></script>
+	<script src="/login-form-14/js/bootstrap.min.js"></script>
+	<script src="/login-form-14/js/main.js"></script>
+
+</body>
+
+</html>

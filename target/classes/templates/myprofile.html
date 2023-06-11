@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Male_Fashion Template">
+<meta name="keywords" content="Male_Fashion, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Male-Fashion</title>
+<link rel="icon" href="/img/logo-3.png">
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+	rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+
+<link rel="stylesheet" href="listeo/css/style.css">
+<link rel="stylesheet" href="listeo/css/main-color.css" id="colors">
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+	<script th:if="${ChangePassSuccess!= null}">
+		swal("Change Password Success", "", "success");
+	</script>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Offcanvas Menu Begin -->
+	<div class="offcanvas-menu-overlay"></div>
+	<div class="offcanvas-menu-wrapper">
+		<div class="offcanvas__option">
+			<div class="offcanvas__links">
+				<a th:if="${session.acc == null}" th:href="@{/signin}">Sign in</a> <a
+					th:if="${session.acc != null}" th:text="${session.acc.user_Name}"></a>
+				<a th:if="${session.acc != null}" th:href="@{/signout}">Sign out</a>
+			</div>
+		</div>
+		<div class="offcanvas__nav__option">
+			<a href="#" class="search-switch"><img src="/img/icon/search.png"
+				alt=""></a> <a href="#"><img src="/img/icon/heart.png" alt=""></a>
+			<a th:href="@{/cart}"><img src="/img/icon/cart.png" alt=""></a>
+		</div>
+		<div id="mobile-menu-wrap"></div>
+		<div class="offcanvas__text">
+			<p>Free shipping, 30-day return or refund guarantee.</p>
+		</div>
+	</div>
+	<!-- Offcanvas Menu End -->
+
+	<!-- Header Section Begin -->
+	<header class="header">
+		<div class="header__top">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-7">
+						<div class="header__top__left">
+							<p>Free shipping, 30-day return or refund guarantee.</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-5">
+						<div class="header__top__right">
+							<div class="header__top__links">
+								<a th:if="${session.acc == null}" th:href="@{/signin}">Sign
+									in</a> <a th:if="${session.acc != null}"
+									th:text="${session.acc.user_Name}" style="color: white;"></a> <a
+									th:if="${session.acc != null}" th:href="@{/signout}">Sign
+									out</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="header__logo">
+						<a href="./index.html"><img src="img/logo.png" alt=""></a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<nav class="header__menu mobile-menu">
+						<ul>
+							<li><a th:href="@{/home}">Home</a></li>
+							<li><a th:href="@{/shop}">Shop</a></li>
+							<li class="active"><a href="#">Pages</a>
+								<ul class="dropdown">
+									<li><a th:href="@{/cart}">Shopping Cart</a></li>
+									<li><a th:href="@{/myprofile}">My Profile</a></li>
+									<li><a th:href="@{/myhistory}">My History</a></li>
+									<li><a th:href="@{/about}">About Us</a></li>
+								</ul></li>
+							<li><a th:href="@{/blog}">Blog</a></li>
+							<li><a th:href="@{/contact}">Contacts</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="col-lg-3 col-md-3">
+					<div class="header__nav__option">
+						<a href="#" class="search-switch"><img
+							src="img/icon/search.png" alt=""></a> <a href="#"><img
+							src="img/icon/heart.png" alt=""></a> <a th:href="@{/cart}"><img
+							src="img/icon/cart.png" alt=""></a>
+					</div>
+				</div>
+			</div>
+			<div class="canvas__open">
+				<i class="fa fa-bars"></i>
+			</div>
+		</div>
+	</header>
+	<div id="dashboard" style="padding-top: 0px;">
+
+
+		<!-- Content
+	================================================== -->
+		<div class="dashboard-content" style="margin-bottom: 30px; margin-left: 0px;">
+
+			<!-- Titlebar -->
+			<div id="titlebar">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>My Profile</h2>
+						<!-- Breadcrumbs -->
+						<nav id="breadcrumbs">
+							<ul>
+								<li><a th:href="@{/home}">Home</a></li>
+								<li>My Profile</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<!-- Profile -->
+				<div class="col-lg-6 col-md-12">
+					<div class="dashboard-list-box margin-top-0">
+						<h4 class="gray">Profile Details</h4>
+						<div class="dashboard-list-box-static">
+							<form action="changeProfile" method="POST"
+								enctype="multipart/form-data">
+								<!-- Avatar -->
+								<div class="edit-profile-photo">
+									<img th:src="${user.avatar}" alt="">
+									<div class="change-photo-btn">
+										<div class="photoUpload">
+											<span><i class="fa fa-upload"></i> Upload Photo</span> <input
+												name="avatar" type="file" accept="image/*" class="upload" />
+										</div>
+									</div>
+								</div>
+
+								<!-- Details -->
+								<div class="my-profile">
+
+									<label>Your Name</label> <input name="fullname"
+										th:value="${user.user_Name}" type="text"> <label>Phone</label>
+									<input name="phone" th:value="${user.phone_Number}" type="text">
+
+									<label>Email</label> <input name="email"
+										th:value="${user.email}" type="text">
+								</div>
+								<span style="color: green;" th:if="${messageChangeProfile != null}" th:text="${messageChangeProfile}"></span><br>
+								<button class="button margin-top-15">Save Changes</button>
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Change Password -->
+				<div class="col-lg-6 col-md-12">
+					<div class="dashboard-list-box margin-top-0">
+						<h4 class="gray">Change Password</h4>
+						<div class="dashboard-list-box-static">
+
+							<!-- Change Password -->
+							<div class="my-profile">
+								<form action="changepassword" method="post">
+									<label class="margin-top-0">Current Password</label> <input
+										name="current_password" type="password"> <label>New
+										Password</label> <input name="new_password" type="password"> <label>Confirm
+										New Password</label> <input name="confirm_password" type="password">
+									<p th:if="${error_change_pass!=null}" style="color: red;"
+										th:text="${error_change_pass}"></p>
+									<button class="button margin-top-15">Change Password</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- Content / End -->
+	</div>
+	<!-- Contact Section End -->
+
+	<!-- Footer Section Begin -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="footer__about">
+						<div class="footer__logo">
+							<a href="#"><img src="img/footer-logo.png" alt=""></a>
+						</div>
+						<p>The customer is at the heart of our unique business model,
+							which includes design.</p>
+						<a href="#"><img src="img/payment.png" alt=""></a>
+					</div>
+				</div>
+				<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+					<div class="footer__widget">
+						<h6>Shopping</h6>
+						<ul>
+							<li><a href="#">Clothing Store</a></li>
+							<li><a href="#">Trending Shoes</a></li>
+							<li><a href="#">Accessories</a></li>
+							<li><a href="#">Sale</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-3 col-sm-6">
+					<div class="footer__widget">
+						<h6>Shopping</h6>
+						<ul>
+							<li><a href="#">Contact Us</a></li>
+							<li><a href="#">Payment Methods</a></li>
+							<li><a href="#">Delivary</a></li>
+							<li><a href="#">Return & Exchanges</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+					<div class="footer__widget">
+						<h6>NewLetter</h6>
+						<div class="footer__newslatter">
+							<p>Be the first to know about new arrivals, look books, sales
+								& promos!</p>
+							<form action="#">
+								<input type="text" placeholder="Your email">
+								<button type="submit">
+									<span class="icon_mail_alt"></span>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="footer__copyright__text">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<p>
+							Copyright ©
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							2020 All rights reserved | This template is made with <i
+								class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+						</p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer Section End -->
+
+	<!-- Search Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form th:action="@{/search}" method="POST" class="search-model-form">
+				<input name="search-input" type="text" id="search-input"
+					placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search End -->
+
+	<!-- Js Plugins -->
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/jquery.nicescroll.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.countdown.min.js"></script>
+	<script src="js/jquery.slicknav.js"></script>
+	<script src="js/mixitup.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>

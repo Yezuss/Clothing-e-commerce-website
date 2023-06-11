@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Admin Page</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/listeo/css/style.css">
+<link rel="stylesheet" href="/listeo/css/main-color.css" id="colors">
+<link rel="icon" href="/img/logo-3.png">
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header Container
+================================================== -->
+		<header id="header-container" class="fixed fullwidth dashboard">
+
+			<!-- Header -->
+			<div id="header" class="not-sticky">
+				<div class="container">
+
+					<!-- Left Side Content -->
+					<div class="left-side">
+
+						<!-- Logo -->
+						<div id="logo">
+							<a href="index.html"><img src="/images/logo2.png" alt=""></a>
+							<a href="index.html" class="dashboard-logo"><img
+								src="/images/logo2.png" alt=""></a>
+						</div>
+
+						<!-- Mobile Navigation -->
+						<div class="mmenu-trigger">
+							<button class="hamburger hamburger--collapse" type="button">
+								<span class="hamburger-box"> <span
+									class="hamburger-inner"></span>
+								</span>
+							</button>
+						</div>
+
+					</div>
+					<!-- Left Side Content / End -->
+
+					<!-- Right Side Content / End -->
+					<div class="right-side">
+						<!-- Header Widget -->
+						<div class="header-widget">
+
+							<!-- User Menu -->
+							<div class="user-menu">
+								<div class="user-name">
+									<span><img th:src="${session.admin.avatar}" alt=""></span>My
+									Account
+								</div>
+								<ul>
+									<li><a th:href="@{/dashboard}"><i
+											class="sl sl-icon-settings"></i> Dashboard</a></li>
+									<li><a th:href="@{/dashboard-myprofile}"><i
+											class="sl sl-icon-envelope-open"></i> My Profile</a></li>
+									<li><a th:href="@{/dashboard-orders}"><i
+											class="fa fa-calendar-check-o"></i> Orders</a></li>
+									<li><a th:href="@{/logout-admin}"><i
+											class="sl sl-icon-power"></i> Logout</a></li>
+								</ul>
+							</div>
+
+							<a th:href="@{/dashboard-addproduct}"
+								class="button border with-icon">Add Product<i
+								class="sl sl-icon-plus"></i></a>
+						</div>
+						<!-- Header Widget / End -->
+					</div>
+					<!-- Right Side Content / End -->
+
+				</div>
+			</div>
+			<!-- Header / End -->
+
+		</header>
+		<div class="clearfix"></div>
+		<!-- Header Container / End -->
+
+
+		<!-- Dashboard -->
+		<div id="dashboard">
+
+			<!-- Navigation
+	================================================== -->
+
+			<!-- Responsive Navigation Trigger -->
+			<a href="#" class="dashboard-responsive-nav-trigger"><i
+				class="fa fa-reorder"></i> Dashboard Navigation</a>
+
+			<div class="dashboard-nav">
+				<div class="dashboard-nav-inner">
+
+					<ul data-submenu-title="Main">
+						<li><a th:href="@{/dashboard}"><i
+								class="sl sl-icon-settings"></i> Dashboard</a></li>
+						<li><a th:href="@{/dashboard-orders}"><i
+								class="fa fa-calendar-check-o"></i> Orders</a></li>
+						<li><a th:href="@{/dashboard-wallet}"><i
+								class="sl sl-icon-wallet"></i> Wallet</a></li>
+					</ul>
+
+					<ul data-submenu-title="Products">
+						<li class="active"><a th:href="@{/dashboard-myproducts}"><i
+								class="sl sl-icon-layers"></i> My products</a></li>
+						<li><a th:href="@{/dashboard-addproduct}"><i
+								class="sl sl-icon-plus"></i> Add Product</a></li>
+					</ul>
+
+					<ul data-submenu-title="Account">
+						<li><a th:href="@{/dashboard-myprofile}"><i
+								class="sl sl-icon-user"></i> My Profile</a></li>
+						<li><a th:href="@{/logout-admin}"><i
+								class="sl sl-icon-power"></i> Logout</a></li>
+					</ul>
+					<ul data-submenu-title="">
+						<li><a th:href="@{/home}"><i class="im im-icon-Home"></i>
+								Go To Home Page</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Navigation / End -->
+
+
+			<!-- Content
+	================================================== -->
+			<div class="dashboard-content">
+
+				<!-- Titlebar -->
+				<div id="titlebar">
+					<div class="row">
+						<div class="col-md-12">
+							<h2>My Products</h2>
+							<!-- Breadcrumbs -->
+							<nav id="breadcrumbs">
+								<ul>
+									<li><a href="#">Home</a></li>
+									<li><a href="#">Dashboard</a></li>
+									<li>My Products</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<form action="/dashboard-myproduct/search" method="Post">
+					<div class="main-search-input"
+						style="margin-bottom: 30px; justify-content: space-between;">
+
+						<div class="main-search-input-item" style="flex: 1">
+							<input name="search-input" type="text"
+								placeholder="Search Your Product" th:value="${search_input}">
+						</div>
+						<div style="display: flex;">
+							<div class="main-search-input-item">
+								
+								<select
+									name="category-selected" data-placeholder="All Categories"
+									class="chosen-select">
+									<option th:value="0">All Categories</option>
+									<th:block th:each="y : ${listCategories}">
+										<option th:value="${y.id}" th:text="${y.category_Name}"></option>
+									</th:block>
+								</select>
+							</div>
+
+							<button class="button" type="submit">Search</button>
+						</div>
+
+
+					</div>
+				</form>
+				<div class="row">
+
+					<!-- Listings -->
+					<div class="col-lg-12 col-md-12">
+						<div class="dashboard-list-box margin-top-0">
+							<h4>My Product</h4>
+							<ul>
+								<th:block th:each="y : ${pageProduct.content}">
+									<li>
+										<div class="list-box-listing">
+											<div class="list-box-listing-img">
+												<a href="#"><img th:src="${y.productImage[0].url_Image}"
+													alt=""></a>
+											</div>
+											<div class="list-box-listing-content">
+												<div class="inner">
+													<h3>
+														<a href="#" th:text="${y.product_Name}"></a>
+													</h3>
+													<h3
+														th:text="${#numbers.formatDecimal(y.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h3>
+													<span th:text="'Categorie: ' + ${y.category.category_Name}"></span><br>
+													<span th:text="'Availability: ' + ${y.quantity}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="buttons-to-right">
+											<a th:href="@{/dashboard-myproducts/edit/{id}(id=${y.id})}" class="button gray"><i
+												class="sl sl-icon-note"></i> Edit</a> <a href="#"
+												class="button gray"><i class="sl sl-icon-close"></i>
+												Delete</a>
+										</div>
+									</li>
+								</th:block>
+							</ul>
+						</div>
+					</div>
+
+
+					<!-- Pagination -->
+					<div class="clearfix"></div>
+					<div th:if="${search_dashboard==null}" class="row">
+						<div class="col-md-12">
+							<div class="pagination-container margin-top-20 margin-bottom-40">
+								<nav class="pagination">
+									<ul>
+										<li><a class="paging-item" th:if="${pageProduct.number} > 0"
+											th:href="@{/dashboard-myproducts/{page}(page=${pageProduct.number - 1})}"><i
+												class="sl sl-icon-arrow-left"></i></a></li>
+										<li><a class="paging-item"
+											th:href="@{/dashboard-myproducts/{page}(page=${pageProduct.number})}"
+											 th:text="${pageProduct.number+1}"></a></li>
+										<li><a class="paging-item"
+											th:if="${pageProduct.number} < ${pageProduct.totalPages - 1}"
+											th:href="@{/dashboard-myproducts/{page}(page=${pageProduct.number + 1})}"><i
+												class="sl sl-icon-arrow-right"></i></a></li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+					<div th:if="${search_dashboard !=null}" class="row">
+						<div class="col-md-12">
+							<div class="pagination-container margin-top-20 margin-bottom-40">
+								<nav class="pagination">
+									<ul>
+										<li><a th:if="${pageProduct.number} > 0"
+											th:href="@{/dashboard-myproduct/search/{page}(page=${pageProduct.number - 1})}"><i
+												class="sl sl-icon-arrow-left"></i></a></li>
+										<li><a
+											th:href="@{/dashboard-myproduct/search/{page}(page=${pageProduct.number})}"
+											class="current-page" th:text="${pageProduct.number+1}"></a></li>
+										<li><a
+											th:if="${pageProduct.number} < ${pageProduct.totalPages - 1}"
+											th:href="@{/dashboard-myproduct/search/{page}(page=${pageProduct.number + 1})}"><i
+												class="sl sl-icon-arrow-right"></i></a></li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+					<!-- Pagination / End -->
+				</div>
+
+			</div>
+			<!-- Content / End -->
+
+
+		</div>
+		<!-- Dashboard / End -->
+
+
+	</div>
+	<!-- Wrapper / End -->
+
+
+	<!-- Scripts
+================================================== -->
+	<script type="text/javascript" src="/scripts/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript"
+		src="/scripts/jquery-migrate-3.3.2.min.js"></script>
+	<script type="text/javascript" src="/scripts/mmenu.min.js"></script>
+	<script type="text/javascript" src="/scripts/chosen.min.js"></script>
+	<script type="text/javascript" src="/scripts/slick.min.js"></script>
+	<script type="text/javascript" src="/scripts/rangeslider.min.js"></script>
+	<script type="text/javascript" src="/scripts/magnific-popup.min.js"></script>
+	<script type="text/javascript" src="/scripts/waypoints.min.js"></script>
+	<script type="text/javascript" src="/scripts/counterup.min.js"></script>
+	<script type="text/javascript" src="/scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/scripts/tooltips.min.js"></script>
+	<script type="text/javascript" src="/scripts/custom.js"></script>
+	<script type="text/javascript" src="/scripts/myjs.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+{"properties": [
+  {
+    "name": "storage.location",
+    "type": "java.lang.String",
+    "description": "A description for 'storage.location'"
+  },
+  {
+    "name": "cloudinary.cloud_name",
+    "type": "java.lang.String",
+    "description": "A description for 'cloudinary.cloud_name'"
+  },
+  {
+    "name": "cloudinary.api_key",
+    "type": "java.lang.String",
+    "description": "A description for 'cloudinary.api_key'"
+  },
+  {
+    "name": "cloudinary.api_secret",
+    "type": "java.lang.String",
+    "description": "A description for 'cloudinary.api_secret'"
+  },
+  {
+    "name": "mail.smtp.debug",
+    "type": "java.lang.String",
+    "description": "A description for 'mail.smtp.debug'"
+  },
+  {
+    "name": "google.link.get.user_info",
+    "type": "java.lang.String",
+    "description": "A description for 'google.link.get.user_info'"
+  },
+  {
+    "name": "google.redirect.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.redirect.uri'"
+  },
+  {
+    "name": "google.app.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'google.app.secret'"
+  },
+  {
+    "name": "google.link.get.token",
+    "type": "java.lang.String",
+    "description": "A description for 'google.link.get.token'"
+  },
+  {
+    "name": "google.app.id",
+    "type": "java.lang.String",
+    "description": "A description for 'google.app.id'"
+  }
+]}
